@@ -1,0 +1,60 @@
+/**
+ * phpBibTeXparser 1.0 (http://dev.brudaswen.de/projects/phpbibtexparser)
+ */
+
+Copyright and Licensing
+
+	Copyright (c) 2011 Sven Obser
+	Licensed under The MIT (X11) License (see COPYING)
+
+Introduction
+
+	This library contains a BibTeX parser that is able to read all the entries 
+	from a given BibTeX file or string. The output is a simple array with all 
+	the relevant information. String/Macro entries are automatically replaced 
+	and are not part of the output. Comments and preambles are currently also 
+	ignored.
+	The parser is based on the grammar description of btparse 
+	(http://search.cpan.org/~gward/btparse-0.34/doc/bt_language.pod) and 
+	consists of a lexer, a parser and some helper classes.
+
+Features
+
+	* Reads BibTeX from file and string.
+	* Extracts @string macros and replaces them accordingly.
+	* Correctly parses @comment{...} sections and ignores everything in between.
+	* Returns all entries in a simple array structure.
+
+Bugs and Feature Requests
+
+	Please report any bugs or feature requests on github
+	(https://github.com/brudaswen/phpBibTeXparser).
+
+Usage
+
+	All you have to do is to create an new instance of 'BibtexParser_pBTXp'. On
+	this object you can call 'parseString' and/or 'parseFile'.
+	Below is a short example:
+	
+	<code>
+	$bibtex = "@article{key, author = {John Doe}, month=sep}";
+	$file = "path/publications.bib";
+	$parser = new BibtexParser_pBTXp(array(
+		'jan' => 'january',
+		'feb' => 'february',
+		'mar' => 'march',
+		'apr' => 'april',
+		'may' => 'may',
+		'jun' => 'june',
+		'jul' => 'july',
+		'aug' => 'august',
+		'sep' => 'september',
+		'oct' => 'october',
+		'nov' => 'november',
+		'dec' => 'december'
+	));
+	$entries_string = $parser->parseString($bibtex);
+	$entries_file = $parser->parseFile($file);
+	print_r($entries_string);
+	print_r($entries_file);
+	</code>
