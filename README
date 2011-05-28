@@ -3,11 +3,13 @@
  */
 
 Copyright and Licensing
+-----------------------
 
 	Copyright (c) 2011 Sven Obser
 	Licensed under The MIT (X11) License (see COPYING)
 
 Introduction
+------------
 
 	This library contains a BibTeX parser that is able to read all the entries 
 	from a given BibTeX file or string. The output is a simple array with all 
@@ -19,27 +21,31 @@ Introduction
 	consists of a lexer, a parser and some helper classes.
 
 Features
+--------
 
 	* Reads BibTeX from file and string.
 	* Extracts @string macros and replaces them accordingly.
 	* Correctly parses @comment{...} sections and ignores everything in between.
+	* Possibility to split author name into forename, von, surname and suffix.
 	* Returns all entries in a simple array structure.
 
 Bugs and Feature Requests
+-------------------------
 
 	Please report any bugs or feature requests on github
 	(https://github.com/brudaswen/phpBibTeXparser).
 
 Usage
+-----
 
-	All you have to do is to create an new instance of 'BibtexParser_pBTXp'. On
+	All you have to do is to create an new instance of 'BibtexParser'. On
 	this object you can call 'parseString' and/or 'parseFile'.
 	Below is a short example:
 	
 	<code>
 	$bibtex = "@article{key, author = {John Doe}, month=sep}";
 	$file = "path/publications.bib";
-	$parser = new BibtexParser_pBTXp(array(
+	$parser = new BibtexParser(array(
 		'jan' => 'january',
 		'feb' => 'february',
 		'mar' => 'march',
@@ -57,4 +63,9 @@ Usage
 	$entries_file = $parser->parseFile($file);
 	print_r($entries_string);
 	print_r($entries_file);
+	
+	// Parse person string
+	$author = "van der Doe, Jr., John";
+	$name =  BibtexParser::parserPerson($author);
+	print_r($name);
 	</code>
